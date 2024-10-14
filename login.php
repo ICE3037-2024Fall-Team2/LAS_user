@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Login successful!<br>";
             echo "Welcome, " . $_SESSION['username'] . "!";
 
-            header("Location: home.html");  
+            header("Location: index.php");  
             exit();
         } else {
             echo "Invalid password!";
