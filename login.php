@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "root"; 
 $password = "your_mysql_password"; 
@@ -24,7 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
       
         if (password_verify($password, $row['password'])) {
-            echo "Login successful!";
+            
+            $_SESSION['id'] = $row['id'];  
+            $_SESSION['username'] = $row['username'];  
+
+            echo "Login successful!<br>";
+            echo "Welcome, " . $_SESSION['username'] . "!";
+
+            header("Location: home.html");  
+            exit();
         } else {
             echo "Invalid password!";
         }
@@ -32,5 +42,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "User not found!";
     }
 }
+
+$conn->close();
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form action="login.php" method="post">
+        <label for="id">Student ID:</label><br>
+        <input type="text" id="id" name="id" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="Login">
+    </form>
+    <p>Don't have an account? <a href="register.php">Go to register</a></p>
+</body>
+</html>
