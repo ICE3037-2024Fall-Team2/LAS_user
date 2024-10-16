@@ -1,5 +1,5 @@
 # LAS_user
-``lab appointment system: mobile web app``
+``[CLOSED]lab appointment system: mobile web app``
 ## Database
 >* 1st table:
 >```Mysql
